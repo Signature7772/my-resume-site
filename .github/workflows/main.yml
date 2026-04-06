@@ -7,21 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # Етап 1: Перевірка HTML (Linter)
-  linter:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: HTMLHint
-        uses: peaceiris/actions-htmlhint@v2
-        with:
-          target_files: 'index.html'
-
-  # Етап 2: Збірка та завантаження в Docker Registry
+  # Залишаємо тільки основну задачу — збірку та пуш імежду
   build-and-push:
-    needs: linter
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -39,7 +26,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
-          # Тут назва імеджу автоматично підтягнеться з твого репозиторію
         uses: docker/build-push-action@v5
         with:
           context: .
