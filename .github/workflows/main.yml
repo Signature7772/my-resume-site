@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: HTML Hint
+      - name: HTML Check
         uses: htmlhint/HTMLHint-action@v2
         with:
           target: 'index.html'
